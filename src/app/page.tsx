@@ -70,6 +70,11 @@ export default function Home() {
           />
         </div>
       </div>
+
+      <div className={classes.footer}>
+        &copy; Abinash {new Date().getFullYear()} a comprehensive leetCode clone
+        created with <b>Next JS</b> & ❤️
+      </div>
     </main>
   );
 }

@@ -65,7 +65,7 @@
   justify-content: center;
   align-items: center;
   height: 500px;
-  padding: 0 18rem;
+  padding: 0 20rem;
 
   .heroImage {
     flex: 1;
@@ -128,7 +128,7 @@
   justify-content: center;
   align-items: center;
   height: 300px;
-  padding: 0 18rem;
+  padding: 0 20rem;
 
   .detailsWarper {
     display: flex;
@@ -221,4 +221,14 @@
       object-fit: contain;
     }
   }
+}
+
+.footer {
+  text-align: center;
+  width: 100%;
+  margin-top: 10rem;
+  margin-bottom: 3rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  letter-spacing: 1px;
 }
