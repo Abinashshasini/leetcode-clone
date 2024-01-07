@@ -1,0 +1,65 @@
+.container {
+  width: 100%;
+
+  .label {
+    display: block;
+    color: var(--black-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+
+    & > span[data-required='true']::after {
+      content: '*';
+      color: #d90b0b;
+      display: inline-block;
+      margin-right: 5px;
+    }
+  }
+
+  .inputContainer {
+    position: relative;
+    padding-bottom: 1.5rem;
+    width: 100%;
+
+    & > input {
+      width: 100%;
+      outline: none;
+      display: block;
+      height: 2.8rem;
+      border-radius: 0.25rem;
+      border: 0.5px solid #546e7a;
+      background: var(--white-primary);
+      padding: 0.75rem;
+      font-size: 0.9em;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--black-primary);
+      transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+      &::placeholder {
+        color: #666666;
+        font-size: 0.8em;
+        opacity: 0.8;
+        letter-spacing: 0.5px;
+      }
+
+      &:focus {
+        border: 1px solid var(--blue-primary);
+        box-shadow: 0 0 0 3px rgba(64, 141, 251, 0.16);
+      }
+
+      &[data-error='true'] {
+        border: 1px solid #d90b0b;
+        box-shadow: 0 0 0 3px rgba(212, 57, 57, 0.16);
+      }
+    }
+
+    .errorMessage {
+      position: absolute;
+      bottom: 0;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #d90b0b;
+    }
+  }
+}

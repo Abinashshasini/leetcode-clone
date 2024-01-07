@@ -4,6 +4,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { BsFillHexagonFill } from 'react-icons/bs';
 import { FaGraduationCap } from 'react-icons/fa';
 import classes from './style.module.scss';
+import LoginModal from '@/components/login/index';
 
 export default function Home() {
   return (
@@ -75,6 +76,7 @@ export default function Home() {
         &copy; Abinash {new Date().getFullYear()} a comprehensive leetCode clone
         created with <b>Next JS</b> & ❤️
       </div>
+      <LoginModal />
     </main>
   );
 }

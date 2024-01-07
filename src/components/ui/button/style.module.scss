@@ -1,0 +1,29 @@
+.button {
+  padding: 0.75rem 1.1rem;
+  border-radius: 0.375rem;
+  transition: all 0.5s;
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  & svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+.button[data-variant='contained'] {
+  background: linear-gradient(215deg, #546e7a, #37474f);
+  color: var(--white-primary);
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+}

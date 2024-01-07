@@ -6,8 +6,15 @@
   --white-primary: #fff;
   --primary-color: #fea116;
   --secondary-color: #1da09c;
+  --black-primary: #1c1d20;
+  --blue-primary: #1890ff;
 }
 
 body {
   background: #f8f8fd;
+}
+
+/* color classes */
+.color_gray {
+  color: #bdbdbd;
 }
