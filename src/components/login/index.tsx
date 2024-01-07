@@ -1,32 +1,43 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import React, { FC, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { IoIosMore } from 'react-icons/io';
+import { useForm } from 'react-hook-form';
 import { FaGoogle, FaGithub, FaFacebook } from 'react-icons/fa';
 import Input from '../ui/input/index';
 import Button from '../ui/button/index';
 import classes from './style.module.scss';
 
-let buttonText = 'Login';
+type TFormValues = {
+  email: string;
+  userName?: string;
+  password?: string;
+};
+
 const LoginModal: FC = () => {
   /** Required states and props */
   const [formType, setFormType] = useState('login');
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    userName: '',
-    password: '',
-  });
-  const { email, userName, password } = userInfo;
 
-  /** Function to handle input change */
-  const handleChange = (event: any) => {
-    const { name, value } = event.target;
-    setUserInfo({ ...userInfo, [name]: value });
+  /** React hook form for form management */
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TFormValues>({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+  });
+
+  /** Function to submit the form */
+  const onSubmit = (data: TFormValues) => {
+    console.log('data: ', data);
   };
 
-  /** Effect to reset the user info state whene there is form type change */
+  /** Effect to reset all fileds if form type changes */
   useEffect(() => {
-    setUserInfo({
+    reset({
       email: '',
       userName: '',
       password: '',
@@ -44,33 +55,71 @@ const LoginModal: FC = () => {
             height={90}
           />
         </div>
+        {formType === 'forget_password' && (
+          <p className="p-2 text-sm color_text_blue">
+            Forgotten your password? Enter your e-mail address bellow, and
+            we&apos;ll send you an e-mail allowing you to reset it.
+          </p>
+        )}
         <div className="w-full py-4 px-3">
           <Input
-            placeholder="Your email"
-            value={email}
-            name="email"
-            onChange={handleChange}
+            placeholder="Email"
+            type="email"
+            error={errors?.email?.message || ''}
+            {...register('email', {
+              required: {
+                value: true,
+                message: 'Email is require',
+              },
+            })}
           />
           {formType === 'register' && (
             <Input
               placeholder="User Name"
-              name="userName"
-              value={userName}
-              onChange={handleChange}
+              type="text"
+              error={errors?.userName?.message || ''}
+              {...register('userName', {
+                required: {
+                  value: true,
+                  message: 'UserName is require',
+                },
+                minLength: {
+                  value: 10,
+                  message: 'Username should be min 10 characters',
+                },
+                maxLength: {
+                  value: 30,
+                  message: 'Username should be max 30 characters',
+                },
+              })}
             />
           )}
           {formType !== 'forget_password' && (
             <Input
               placeholder="Password"
-              name="password"
-              value={password}
-              onChange={handleChange}
+              type="text"
+              error={errors?.password?.message || ''}
+              {...register('password', {
+                required: {
+                  value: true,
+                  message: 'Password is require',
+                },
+                minLength: {
+                  value: 10,
+                  message: 'Password should be min 10 characters',
+                },
+                maxLength: {
+                  value: 30,
+                  message: "Password can't be more than 30 characters",
+                },
+              })}
             />
           )}
           <Button
             variant="contained"
             className="w-full capitalize"
-            text={formType === 'forget_password' ? 'Send Email' : formType}
+            text={formType === 'forget_password' ? 'Reset Password' : formType}
+            onClick={handleSubmit(onSubmit)}
           />
           {(() => {
             if (formType === 'login') {

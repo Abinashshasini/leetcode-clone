@@ -4,11 +4,16 @@ import React, {
   CSSProperties,
   InputHTMLAttributes,
 } from 'react';
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 import classes from './style.module.scss';
 
 type TProps = {
   id?: string;
-  error?: string;
+  error?:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined;
   label?: string;
   type?: string;
   required?: boolean;
@@ -47,11 +52,11 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, TProps & InputProps> = (
           ref={ref}
           id={id}
           placeholder={placeholder}
-          data-error={error.length > 0}
+          data-error={error && typeof error === 'string' && error.length > 0}
           {...props}
         />
 
-        {error.length > 0 && (
+        {error && typeof error === 'string' && (
           <span className={classes.errorMessage}>{error}</span>
         )}
       </div>
