@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 15rem;
+  position: relative;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & > img {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    & > h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white-primary);
+    }
+  }
+
+  .menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    cursor: pointer;
+    color: var(--white-primary);
+
+    .menuItem {
+      font-size: 0.9rem;
+      color: var(--white-primary);
+      padding: 8px 15px;
+      transition: all 0.5s;
+      border-radius: 1.5rem;
+
+      &:first-child {
+        color: var(--primary-color);
+      }
+
+      &:first-child:hover {
+        background: var(--primary-color);
+        color: black;
+      }
+
+      &:hover {
+        background: var(--white-primary);
+        color: black;
+      }
+    }
+  }
+}
