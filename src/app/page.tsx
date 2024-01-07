@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Header from '@/components/header/index';
 import { IoIosArrowForward } from 'react-icons/io';
+import { BsFillHexagonFill } from 'react-icons/bs';
+import { FaGraduationCap } from 'react-icons/fa';
 import classes from './style.module.scss';
 
 export default function Home() {
@@ -34,6 +36,38 @@ export default function Home() {
               Create Account <IoIosArrowForward />
             </button>
           </div>
+        </div>
+      </div>
+
+      <div className={classes.aboutContainer}>
+        <div className={classes.detailsWarper}>
+          <div className={classes.headingText}>
+            <h2>Start Exploring</h2>
+            <div className={classes.iconCnt}>
+              <div className={classes.iconOne}>
+                <BsFillHexagonFill />
+              </div>
+              <div className={classes.iconTwo}>
+                <FaGraduationCap />
+              </div>
+            </div>
+          </div>
+          <p>
+            Explore is a well-organized tool that helps you get the most out of
+            LeetCode by providing structure to guide your progress towards the
+            next step in your programming career.
+          </p>
+          <div className={classes.getStarted}>
+            Get Started <IoIosArrowForward />
+          </div>
+        </div>
+        <div className={classes.detailsImageWarper}>
+          <img
+            src="/assets/tasks.png"
+            alt="dashboard"
+            width={300}
+            height={300}
+          />
         </div>
       </div>
     </main>
