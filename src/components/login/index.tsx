@@ -5,9 +5,11 @@ import Image from 'next/image';
 import { IoIosMore } from 'react-icons/io';
 import { useForm } from 'react-hook-form';
 import { FaGoogle, FaGithub, FaFacebook } from 'react-icons/fa';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import Input from '../ui/input/index';
 import Button from '../ui/button/index';
 import classes from './style.module.scss';
+import { auth } from '@/firebase/firebase';
 
 type TFormValues = {
   email: string;
@@ -29,6 +31,10 @@ const LoginModal: FC = () => {
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
+
+  /** Firebase hook for login/signup */
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
 
   /** Function to submit the form */
   const onSubmit = (data: TFormValues) => {
@@ -56,7 +62,7 @@ const LoginModal: FC = () => {
           />
         </div>
         {formType === 'forget_password' && (
-          <p className="p-2 text-sm color_text_blue">
+          <p className="p-3 text-sm color_text_blue">
             Forgotten your password? Enter your e-mail address bellow, and
             we&apos;ll send you an e-mail allowing you to reset it.
           </p>
@@ -115,12 +121,6 @@ const LoginModal: FC = () => {
               })}
             />
           )}
-          <Button
-            variant="contained"
-            className="w-full capitalize"
-            text={formType === 'forget_password' ? 'Reset Password' : formType}
-            onClick={handleSubmit(onSubmit)}
-          />
           {(() => {
             if (formType === 'login') {
               return (
@@ -158,6 +158,12 @@ const LoginModal: FC = () => {
 
             return null;
           })()}
+          <Button
+            variant="contained"
+            className="w-full capitalize my-3"
+            text={formType === 'forget_password' ? 'Reset Password' : formType}
+            onClick={handleSubmit(onSubmit)}
+          />
           <div className="text-center my-6 font-light text-sm color_gray">
             or you can sign in with
           </div>

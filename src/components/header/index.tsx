@@ -1,7 +1,12 @@
+import { FC } from 'react';
 import Image from 'next/image';
 import classes from './style.module.scss';
 
-const Header = () => {
+type THeaderProps = {
+  onClickSignIn: () => void;
+};
+
+const Header: FC<THeaderProps> = ({ onClickSignIn }) => {
   return (
     <div className={classes.container}>
       <div className={classes.logo}>
@@ -13,7 +18,9 @@ const Header = () => {
         <div className={classes.menuItem}>Explore</div>
         <div className={classes.menuItem}>Product</div>
         <div className={classes.menuItem}>Develpper</div>
-        <div className={classes.menuItem}>Sign in</div>
+        <div className={classes.menuItem} onClick={onClickSignIn}>
+          Sign in
+        </div>
       </div>
     </div>
   );

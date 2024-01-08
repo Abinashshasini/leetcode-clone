@@ -1,12 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import Header from '@/components/header/index';
+'use client';
+import { useState } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { BsFillHexagonFill } from 'react-icons/bs';
 import { FaGraduationCap } from 'react-icons/fa';
-import classes from './style.module.scss';
+import Header from '@/components/header/index';
 import LoginModal from '@/components/login/index';
+import classes from './style.module.scss';
 
 export default function Home() {
+  /** Required states and props */
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   return (
     <main>
       <div className={classes.background}>
@@ -16,7 +21,7 @@ export default function Home() {
         <span></span>
       </div>
       <div className={classes.backgroundTwo}></div>
-      <Header />
+      <Header onClickSignIn={() => setIsLoginModalOpen(true)} />
       <div className={classes.herocontainer}>
         <div className={classes.heroImage}>
           <img
@@ -33,7 +38,7 @@ export default function Home() {
             expand your knowledge and prepare for technical interviews.
           </p>
           <div className={classes.buttonContainer}>
-            <button>
+            <button onClick={() => setIsLoginModalOpen(true)}>
               Create Account <IoIosArrowForward />
             </button>
           </div>
@@ -76,7 +81,7 @@ export default function Home() {
         &copy; Abinash {new Date().getFullYear()} a comprehensive leetCode clone
         created with <b>Next JS</b> & ❤️
       </div>
-      <LoginModal />
+      {isLoginModalOpen && <LoginModal />}
     </main>
   );
 }
