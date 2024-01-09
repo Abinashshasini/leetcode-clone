@@ -5,7 +5,12 @@ import Image from 'next/image';
 import { IoIosMore } from 'react-icons/io';
 import { useForm } from 'react-hook-form';
 import { FaGoogle, FaGithub, FaFacebook } from 'react-icons/fa';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
+} from 'react-firebase-hooks/auth';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 import Input from '../ui/input/index';
 import Button from '../ui/button/index';
 import classes from './style.module.scss';
@@ -17,9 +22,14 @@ type TFormValues = {
   password?: string;
 };
 
-const LoginModal: FC = () => {
+type TProps = {
+  handleClose: () => void;
+};
+
+const LoginModal: FC<TProps> = ({ handleClose }) => {
+  const router = useRouter();
   /** Required states and props */
-  const [formType, setFormType] = useState('login');
+  const [formType, setFormType] = useState('register');
 
   /** React hook form for form management */
   const {
@@ -36,9 +46,31 @@ const LoginModal: FC = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
+  /** Function to register user */
+  const handleRegistreUser = async (
+    email: string,
+    password: string | undefined
+  ) => {
+    try {
+      const newUser = await createUserWithEmailAndPassword(email, password);
+      if (!newUser) return;
+      toast.success('Voila your account created successfully', {
+        position: 'top-center',
+        icon: '👏',
+      });
+      router.push('/dashboard');
+      handleClose();
+    } catch (error: any) {
+      console.error('Something went wrong while registering the user');
+    }
+  };
+
   /** Function to submit the form */
-  const onSubmit = (data: TFormValues) => {
-    console.log('data: ', data);
+  const onSubmit = async (data: TFormValues) => {
+    const { email, password } = data;
+    if (formType === 'register') {
+      handleRegistreUser(email, password);
+    }
   };
 
   /** Effect to reset all fileds if form type changes */
@@ -49,6 +81,15 @@ const LoginModal: FC = () => {
       password: '',
     });
   }, [formType]);
+
+  /** Effect to handle errors */
+  useEffect(() => {
+    if (error) {
+      toast.error('This email is alredy exists', {
+        position: 'top-center',
+      });
+    }
+  }, [error]);
 
   return (
     <div className={classes.conatiner}>
@@ -124,7 +165,7 @@ const LoginModal: FC = () => {
           {(() => {
             if (formType === 'login') {
               return (
-                <div className="flex justify-between items-center py-4">
+                <div className="flex justify-between items-center pb-2">
                   <div className={classes.forgetPas}>
                     Dont have an account{' '}
                     <b onClick={() => setFormType('register')}>Sign in</b>
@@ -141,7 +182,7 @@ const LoginModal: FC = () => {
 
             if (formType === 'register') {
               return (
-                <div className="flex justify-between items-center py-4">
+                <div className="flex justify-between items-center pb-2">
                   <div className={classes.forgetPas}>
                     Already have an account{' '}
                     <b onClick={() => setFormType('login')}>Register</b>

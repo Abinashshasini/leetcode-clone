@@ -81,7 +81,9 @@ export default function Home() {
         &copy; Abinash {new Date().getFullYear()} a comprehensive leetCode clone
         created with <b>Next JS</b> & ❤️
       </div>
-      {isLoginModalOpen && <LoginModal />}
+      {isLoginModalOpen && (
+        <LoginModal handleClose={() => setIsLoginModalOpen(false)} />
+      )}
     </main>
   );
 }

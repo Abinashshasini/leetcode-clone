@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
+import { Toaster } from 'react-hot-toast';
 import './globals.scss';
 
 export const metadata: Metadata = {
@@ -14,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={GeistSans.className}>{children}</body>
+      <body className={GeistSans.className}>
+        <main>{children}</main>
+        <Toaster />
+      </body>
     </html>
   );
 }
