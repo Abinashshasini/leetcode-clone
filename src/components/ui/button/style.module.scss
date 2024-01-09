@@ -1,5 +1,5 @@
 .button {
-  padding: 0.75rem 1.1rem;
+  padding: 0 1.1rem;
   border-radius: 0.375rem;
   transition: all 0.5s;
   font-size: 0.875rem;
@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 45px;
 
   &:active {
     transform: scale(0.98);
@@ -25,5 +26,24 @@
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+}
+
+.loading {
+  display: inline-block;
+  border: 3px solid #7a939f;
+  border-radius: 50%;
+  border-top: 3px solid #fff;
+  width: 22px;
+  position: absolute;
+  height: 22px;
+  animation: loadingAnimation 1s linear infinite;
+}
+@keyframes loadingAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

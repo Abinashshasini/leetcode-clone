@@ -13,8 +13,8 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import Input from '../ui/input/index';
 import Button from '../ui/button/index';
-import classes from './style.module.scss';
 import { auth } from '@/firebase/firebase';
+import classes from './style.module.scss';
 
 type TFormValues = {
   email: string;
@@ -43,8 +43,18 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
   });
 
   /** Firebase hook for login/signup */
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [
+    createUserWithEmailAndPassword,
+    registerdUser,
+    registerLoading,
+    registerError,
+  ] = useCreateUserWithEmailAndPassword(auth);
+  const [
+    signInWithEmailAndPassword,
+    logedinUser,
+    logedinLoading,
+    logedinError,
+  ] = useSignInWithEmailAndPassword(auth);
 
   /** Function to register user */
   const handleRegistreUser = async (
@@ -58,7 +68,20 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
         position: 'top-center',
         icon: '👏',
       });
-      router.push('/dashboard');
+      handleClose();
+    } catch (error: any) {
+      console.error('Something went wrong while registering the user');
+    }
+  };
+
+  /** Function to login the user with email and password */
+  const handleLogedinUser = async (
+    email: string,
+    password: string | undefined
+  ) => {
+    try {
+      const newUser = await signInWithEmailAndPassword(email, password);
+      if (!newUser) return;
       handleClose();
     } catch (error: any) {
       console.error('Something went wrong while registering the user');
@@ -70,6 +93,8 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
     const { email, password } = data;
     if (formType === 'register') {
       handleRegistreUser(email, password);
+    } else if (formType === 'login') {
+      handleLogedinUser(email, password);
     }
   };
 
@@ -84,12 +109,22 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
 
   /** Effect to handle errors */
   useEffect(() => {
-    if (error) {
-      toast.error('This email is alredy exists', {
-        position: 'top-center',
-      });
+    if (registerError && formType === 'register') {
+      toast.error(
+        'Uh-oh! It seems like you’re already part of our awesome community. Sign in or try another email.',
+        {
+          position: 'top-center',
+        }
+      );
+    } else if (logedinError && formType === 'login') {
+      toast.error(
+        'Oops! That doesn’t look like a valid email. Mind double-checking?',
+        {
+          position: 'top-center',
+        }
+      );
     }
-  }, [error]);
+  }, [registerError, logedinError]);
 
   return (
     <div className={classes.conatiner}>
@@ -144,7 +179,7 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
           {formType !== 'forget_password' && (
             <Input
               placeholder="Password"
-              type="text"
+              type="password"
               error={errors?.password?.message || ''}
               {...register('password', {
                 required: {
@@ -168,7 +203,7 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
                 <div className="flex justify-between items-center pb-2">
                   <div className={classes.forgetPas}>
                     Dont have an account{' '}
-                    <b onClick={() => setFormType('register')}>Sign in</b>
+                    <b onClick={() => setFormType('register')}>Register</b>
                   </div>
                   <div
                     className={classes.forgetPas}
@@ -185,7 +220,7 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
                 <div className="flex justify-between items-center pb-2">
                   <div className={classes.forgetPas}>
                     Already have an account{' '}
-                    <b onClick={() => setFormType('login')}>Register</b>
+                    <b onClick={() => setFormType('login')}>Sign in</b>
                   </div>
                   <div
                     className={classes.forgetPas}
@@ -203,6 +238,7 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
             variant="contained"
             className="w-full capitalize my-3"
             text={formType === 'forget_password' ? 'Reset Password' : formType}
+            loading={logedinLoading || registerLoading}
             onClick={handleSubmit(onSubmit)}
           />
           <div className="text-center my-6 font-light text-sm color_gray">

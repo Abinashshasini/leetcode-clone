@@ -9,6 +9,7 @@ const Button: FC<{
   className?: string;
   text?: string;
   disabled?: boolean;
+  loading?: boolean;
 }> = ({
   variant = 'contained',
   children,
@@ -16,6 +17,7 @@ const Button: FC<{
   styles = {},
   className = '',
   text = '',
+  loading,
   disabled = false,
 }) => {
   return (
@@ -26,7 +28,8 @@ const Button: FC<{
       disabled={disabled}
       className={`${classes.button} ${className} flex items-center`}
     >
-      {children ? children : text}
+      {!loading && (children ? children : text)}
+      {loading && <span className={classes.loading} />}
     </button>
   );
 };

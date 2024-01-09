@@ -1,9 +1,12 @@
 import React from 'react';
+import LogoutButton from '@/components/logout-button/index';
 
 const Dashboard = () => {
   return (
     <div>
-      <p>Dashboard</p>
+      <LogoutButton>
+        <button>logout</button>
+      </LogoutButton>
     </div>
   );
 };

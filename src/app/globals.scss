@@ -8,10 +8,12 @@
   --secondary-color: #1da09c;
   --black-primary: #1c1d20;
   --blue-primary: #1890ff;
+  --background-one: #1b1b1a;
+  --background-two: #f8f8fd;
 }
 
 body {
-  background: #f8f8fd;
+  background: var(--background-one);
 }
 
 /* color classes */
