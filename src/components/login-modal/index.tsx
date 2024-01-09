@@ -127,7 +127,7 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
   }, [registerError, logedinError]);
 
   return (
-    <div className={classes.conatiner}>
+    <div className={classes.container}>
       <div className={classes.wraper}>
         <div className="flex justify-center py-8">
           <Image

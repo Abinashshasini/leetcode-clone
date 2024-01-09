@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 15rem;
+  padding: 0 15rem;
   position: relative;
+  min-height: 100px;
 
   .logo {
     display: flex;
@@ -32,7 +33,7 @@
     .menuItem {
       font-size: 0.9rem;
       color: var(--white-primary);
-      padding: 8px 15px;
+      padding: 6px 15px;
       transition: all 0.5s;
       border-radius: 1.5rem;
 
@@ -50,5 +51,40 @@
         color: black;
       }
     }
+
+    .logoutBtn {
+      & > svg {
+        font-size: 1.3rem;
+        transition: all 0.5s;
+
+        &:hover {
+          color: var(--primary-color);
+          scale: 1.1;
+        }
+      }
+    }
+  }
+
+  &[data-isBackgroundPresent='true'] {
+    background-color: rgb(40 40 40 /1);
+    border-bottom: 1px solid #ffffff24;
+    min-height: 65px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .container {
+    padding: 0 2rem;
+    min-height: 60px;
+
+    .menu {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .container {
+    padding: 0 8rem;
   }
 }

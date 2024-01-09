@@ -1,4 +1,4 @@
-.conatiner {
+.container {
   position: fixed;
   inset: 0;
   z-index: 10;
@@ -50,7 +50,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .conatiner {
+  .container {
     .wraper {
       width: 80%;
     }
@@ -58,7 +58,7 @@
 }
 
 @media only screen and (max-width: 1400px) {
-  .conatiner {
+  .container {
     .wraper {
       width: 60%;
     }

@@ -1,14 +1,29 @@
+'use client';
 import { FC } from 'react';
 import Image from 'next/image';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { TbLogout } from 'react-icons/tb';
+import { auth } from '@/firebase/firebase';
+import LogoutButton from '../logout-button/index';
 import classes from './style.module.scss';
 
 type THeaderProps = {
-  onClickSignIn: () => void;
+  onClickSignIn?: () => void;
+  isBackgroundPresent?: boolean;
 };
 
-const Header: FC<THeaderProps> = ({ onClickSignIn }) => {
+const Header: FC<THeaderProps> = ({
+  onClickSignIn,
+  isBackgroundPresent = false,
+}) => {
+  /** Firebase hook to check if the user is already logged in or not */
+  const [user] = useAuthState(auth);
+
   return (
-    <div className={classes.container}>
+    <div
+      className={classes.container}
+      data-isBackgroundPresent={isBackgroundPresent}
+    >
       <div className={classes.logo}>
         <Image src="/assets/logo.png" width={100} height={100} alt="logo" />
         <h1>Leetcode</h1>
@@ -18,9 +33,22 @@ const Header: FC<THeaderProps> = ({ onClickSignIn }) => {
         <div className={classes.menuItem}>Explore</div>
         <div className={classes.menuItem}>Product</div>
         <div className={classes.menuItem}>Develpper</div>
-        <div className={classes.menuItem} onClick={onClickSignIn}>
-          Sign in
-        </div>
+        {(() => {
+          if (user) {
+            return (
+              <LogoutButton>
+                <div className={classes.logoutBtn}>
+                  <TbLogout />
+                </div>
+              </LogoutButton>
+            );
+          }
+          return (
+            <div className={classes.menuItem} onClick={onClickSignIn}>
+              Sign in
+            </div>
+          );
+        })()}
       </div>
     </div>
   );
