@@ -1,0 +1,24 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+
+  .imgCnt {
+    overflow: hidden;
+    border-radius: 8px;
+    transition: all 0.5s;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0px 1px 3px #0000003d,
+      0px 2px 8px #00000029;
+    cursor: pointer;
+
+    & > img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    &:hover {
+      scale: 1.02;
+    }
+  }
+}
