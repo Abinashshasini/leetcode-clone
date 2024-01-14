@@ -23,7 +23,7 @@ export default function Home() {
   /** Effect to check if the user is already logged in */
   useEffect(() => {
     if (user) {
-      router.push('/dashboard');
+      router.push('/problems');
     }
   }, [user]);
 
