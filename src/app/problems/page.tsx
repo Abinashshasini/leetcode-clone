@@ -3,8 +3,8 @@ import Header from '@/components/header/index';
 import SectionOne from './components/section-one/index';
 import SectionTwo from './components/section-two/index';
 import AllProblems from './components/all-problems/index';
-import classes from './style.module.scss';
 import SectionThree from './components/section-three/index';
+import classes from './style.module.scss';
 
 const Dashboard = () => {
   return (
