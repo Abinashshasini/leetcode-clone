@@ -1,0 +1,43 @@
+.container {
+  height: 100%;
+  background-color: #272627;
+  border-radius: 8px;
+  border: 1px solid #565656;
+  overflow-y: scroll;
+  padding: 0 !important;
+
+  .tabContainers {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #323332;
+    height: 40px;
+    padding: 0 0.2rem;
+    position: relative;
+
+    .tabs {
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 3px 1rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      opacity: 0.5;
+
+      &:hover {
+        border-radius: 6px;
+        background-color: #ffffff14;
+      }
+
+      &:first-child {
+        opacity: 1;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

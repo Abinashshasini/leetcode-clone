@@ -1,25 +1,44 @@
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { BsCheck2Circle } from 'react-icons/bs';
 import { TiStarOutline } from 'react-icons/ti';
+import { FaFlask } from 'react-icons/fa';
+import { GrNotes } from 'react-icons/gr';
+import { IoDocumentText } from 'react-icons/io5';
+import { MdFullscreen } from 'react-icons/md';
+import classes from './style.module.scss';
 
-type ProblemDescriptionProps = {};
+type ProblemDescriptionProps = {
+  onStretch: (_params: string) => void;
+};
 
-const ProblemDescription: React.FC<ProblemDescriptionProps> = () => {
+const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
+  onStretch,
+}) => {
   return (
-    <div className="bg-dark-layer-1">
-      {/* TAB */}
-      <div className="flex h-11 w-full items-center pt-2 bg-dark-layer-2 text-white overflow-x-hidden">
-        <div
-          className={
-            'bg-dark-layer-1 rounded-t-[5px] px-5 py-[10px] text-xs cursor-pointer'
-          }
-        >
-          Description
+    <div className={classes.container}>
+      <div className="flex px-0 h-[calc(100vh-94px)] overflow-y-auto flex-col">
+        {/* Tabs */}
+        <div className={classes.tabContainers}>
+          <div className={classes.tabs}>
+            <IoDocumentText color="#1890ff" />
+            Description
+          </div>
+          <div className={classes.tabs}>
+            <GrNotes color="#fea116" />
+            Notes
+          </div>
+          <div className={classes.tabs}>
+            <FaFlask color="#1da09c" />
+            Solutions
+          </div>
+          <div
+            className="fullScreenIcon"
+            onClick={() => onStretch('description')}
+          >
+            <MdFullscreen />
+          </div>
         </div>
-      </div>
-
-      <div className="flex px-0 py-4 h-[calc(100vh-94px)] overflow-y-auto">
-        <div className="px-5">
+        <div className="px-5 py-3">
           {/* Problem heading */}
           <div className="w-full">
             <div className="flex space-x-4">

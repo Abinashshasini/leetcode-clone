@@ -58,25 +58,27 @@ body {
 .split {
   display: flex;
   flex-direction: row;
+  padding: 0 0.8rem;
 }
 
 .gutter {
-  background-color: rgb(26, 26, 26);
+  background-color: #0e0e0f;
   background-repeat: no-repeat;
   background-position: 50%;
 }
 .gutter:hover {
+  width: 4px !important;
+  border-radius: 5px;
+  margin: 0 5px;
   background-color: #0a84ff;
 }
 
 .gutter.gutter-horizontal {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
-  cursor: col-resize;
+  cursor: ew-resize;
 }
 
 .gutter.gutter-vertical {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
-  cursor: row-resize;
+  cursor: ew-resize;
 }
 
 code {
@@ -108,4 +110,22 @@ code {
 .example-card pre strong {
   color: white;
   font-size: 1rem;
+}
+
+.fullScreenIcon {
+  padding: 4px;
+  position: absolute;
+  right: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  & > svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: #ffffff14;
+  }
 }
