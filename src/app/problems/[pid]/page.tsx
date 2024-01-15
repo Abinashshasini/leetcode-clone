@@ -1,10 +1,12 @@
-import Header from '@/components/header/index';
-import WorkSpace from '@/components/workspace/index';
 import React from 'react';
+import PidHeader from '@/components/pid-header/index';
+import WorkSpace from '@/components/workspace/index';
+import classes from './style.module.scss';
 
 const PidPage = () => {
   return (
-    <main>
+    <main className={classes.container}>
+      <PidHeader />
       <WorkSpace />
     </main>
   );
