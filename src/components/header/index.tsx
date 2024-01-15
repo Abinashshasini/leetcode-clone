@@ -3,12 +3,9 @@ import { FC } from 'react';
 import Image from 'next/image';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { TbLogout } from 'react-icons/tb';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { RiListCheck2 } from 'react-icons/ri';
 import { auth } from '@/firebase/firebase';
 import LogoutButton from '../logout-button/index';
 import classes from './style.module.scss';
-import Timer from '../ui/timer/index';
 
 type THeaderProps = {
   onClickSignIn?: () => void;
@@ -35,40 +32,11 @@ const Header: FC<THeaderProps> = ({
         <h1>Leetcode</h1>
       </div>
 
-      {/*  Change problem container */}
-      {isPidPage && (
-        <div className={classes.togglePidContainer}>
-          <div className={classes.arrowWrp}>
-            <IoIosArrowBack />
-          </div>
-          <Image src="/assets/problem.svg" alt="icon" width={16} height={16} />
-          <p>Daily Question</p>
-          <div className={classes.arrowWrp}>
-            <IoIosArrowForward />
-          </div>
-        </div>
-      )}
-
       <div className={classes.menu}>
-        {(() => {
-          if (!isPidPage) {
-            return (
-              <>
-                <div className={classes.menuItem}>Problems</div>
-                <div className={classes.menuItem}>Explore</div>
-                <div className={classes.menuItem}>Product</div>
-                <div className={classes.menuItem}>Develpper</div>
-              </>
-            );
-          }
-
-          return (
-            <>
-              <div className={classes.premium}>Premium</div>
-              <Timer />
-            </>
-          );
-        })()}
+        <div className={classes.menuItem}>Problems</div>
+        <div className={classes.menuItem}>Explore</div>
+        <div className={classes.menuItem}>Product</div>
+        <div className={classes.menuItem}>Develpper</div>
 
         {(() => {
           if (user) {

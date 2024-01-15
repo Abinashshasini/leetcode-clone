@@ -5,7 +5,6 @@ import React from 'react';
 const PidPage = () => {
   return (
     <main>
-      <Header isBackgroundPresent isPidPage />
       <WorkSpace />
     </main>
   );
