@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import classes from './style.module.scss';
 
 type TProps = {
   children: React.ReactNode;
@@ -12,7 +13,7 @@ const Tooltip: FC<TProps> = ({
   position = 'bottom',
 }) => {
   return (
-    <div>
+    <div className={classes.tooltipContainer}>
       {children}
       <span data-position={position}>{tooltip}</span>
     </div>

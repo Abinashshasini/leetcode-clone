@@ -1,0 +1,18 @@
+.tooltipContainer {
+  height: inherit;
+  width: inherit;
+  position: relative;
+
+  & > span {
+    display: none;
+    position: absolute;
+    bottom: -20;
+    height: 20px;
+    color: #949494;
+    background: #ffffff0f;
+  }
+
+  &:hover span {
+    display: block;
+  }
+}

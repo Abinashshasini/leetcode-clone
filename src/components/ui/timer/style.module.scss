@@ -1,5 +1,5 @@
 .clock {
-  background-color: #949494;
+  background-color: #ffffff14;
   width: 2rem;
   height: 2rem;
   border-radius: 6px;
@@ -12,11 +12,12 @@
 .timer {
   display: flex;
   align-items: center;
-  background-color: #949494;
+  background-color: #ffffff14;
   padding: 5px 1rem;
   border-radius: 6px;
   font-size: 1rem;
   cursor: default;
+  transition: width 0.3;
 
   .iconSmall {
     width: 1rem;
@@ -45,7 +46,7 @@
 .clock,
 .timer {
   &:hover {
-    background-color: #afafaf;
+    background: #ffffff2f;
   }
 
   & > svg {
