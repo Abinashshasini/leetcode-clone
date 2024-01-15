@@ -26,7 +26,8 @@
       height: 1rem;
       width: 1px;
       background-color: #ffffff14;
-      margin: 0 10px;
+      margin-left: 4px;
+      margin-right: 10px;
     }
 
     .problemFeatures {
@@ -45,6 +46,7 @@
         padding: 0 10px;
         height: inherit;
         width: 150px;
+        cursor: pointer;
 
         .tabIcon {
           display: none;
@@ -79,6 +81,10 @@
         @include felx-center();
         width: 2rem;
         justify-content: center;
+
+        & > svg {
+          color: #949494;
+        }
 
         &:hover {
           background: #ffffff0f;
