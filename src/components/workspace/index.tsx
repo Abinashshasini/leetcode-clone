@@ -1,27 +1,19 @@
 'use client';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import Split from 'react-split';
+import PlayGround from '../playground/index';
 import ProblemDescription from '../problem-description/index';
 
 const WorkSpace: FC = () => {
-  /** Required states and refs */
-  const [stretchedComponent, setStretchedComponent] = useState('');
-  console.log('stretchedComponent: ', stretchedComponent);
-
-  /** Function to stretch one component */
-  const handleStretch = (_params: string) => {
-    setStretchedComponent(_params);
-  };
-
   return (
-    <Split className="split" minSize={50} style={{ padding: '1rem' }}>
-      {(stretchedComponent === '' || stretchedComponent === 'description') && (
-        <ProblemDescription onStretch={handleStretch} />
-      )}
-
-      {(stretchedComponent === '' || stretchedComponent === 'playground') && (
-        <div>Bakchodi</div>
-      )}
+    <Split
+      className="split"
+      minSize={50}
+      style={{ padding: '1rem', paddingTop: '5px' }}
+      sizes={[50, 50]}
+    >
+      <ProblemDescription onStretch={() => {}} />
+      <PlayGround />
     </Split>
   );
 };
