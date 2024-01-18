@@ -6,8 +6,13 @@ import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import { IoIosSettings } from 'react-icons/io';
 import classes from './style.module.scss';
+import { Problem } from '@/utils/types/problem';
 
-const PlayGround: FC = () => {
+type Tprops = {
+  problem: Problem;
+};
+
+const PlayGround: FC<Tprops> = ({ problem }) => {
   return (
     <Split
       direction="vertical"
@@ -31,10 +36,10 @@ const PlayGround: FC = () => {
           </div>
         </div>
         <CodeMirror
-          value="const a = 1"
+          value={problem.starterCode}
           theme={vscodeDark}
           extensions={[javascript()]}
-          style={{ fontSize: 16 }}
+          style={{ fontSize: 14 }}
         />
       </div>
       <div className={classes.textCases}>testcase</div>

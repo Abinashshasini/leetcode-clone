@@ -1,8 +1,13 @@
 import assert from 'assert';
 import { Problem } from '../types/problem';
 
-const starterCodeTwoSum = `function twoSum(nums,target){
-  // Write your code here
+const starterCodeTwoSum = `/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    // write your code here
 };`;
 
 /** checks if the user has the correct code */

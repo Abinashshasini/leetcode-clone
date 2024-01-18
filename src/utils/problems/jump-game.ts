@@ -36,7 +36,6 @@ export const jumpGame: Problem = {
     Return <code>true</code> if you can reach the last index, or <code>false</code> otherwise.
     </p>
   `,
-
   examples: [
     {
       id: 0,

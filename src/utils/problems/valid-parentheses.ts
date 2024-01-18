@@ -16,8 +16,12 @@ export const validParenthesesHandler = (fn: any) => {
   }
 };
 
-const starterCodeValidParenthesesJS = `function validParentheses(s) {
-  // Write your code here
+const starterCodeValidParenthesesJS = `/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    
 };`;
 
 export const validParentheses: Problem = {

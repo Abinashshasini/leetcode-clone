@@ -101,19 +101,22 @@ code {
 }
 
 .example-card pre {
-  background-color: hsla(0, 0%, 100%, 0.1);
-  border-radius: 0.5rem;
-  color: rgba(239, 241, 246, 0.75);
-  font-size: 0.98rem;
+  border-color: #ffffff24;
+  border-left-width: 2px;
+  color: #fff9;
+  font-family: Menlo, sans-serif;
+  font-size: 0.875rem;
   line-height: 1.25rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
-  padding: 1rem;
+  overflow: visible;
+  padding-left: 1rem;
   white-space: pre-wrap;
-}
-.example-card pre strong {
-  color: white;
-  font-size: 1rem;
+
+  & > span {
+    display: block;
+    margin: 5px 0;
+  }
 }
 
 .fullScreenIcon {

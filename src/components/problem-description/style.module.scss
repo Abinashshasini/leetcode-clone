@@ -4,6 +4,7 @@
   border-radius: 8px;
   border: 1px solid #565656;
   overflow-y: scroll;
+  position: relative;
   padding: 0 !important;
 
   .tabContainers {
@@ -12,8 +13,12 @@
     align-items: center;
     background-color: #323332;
     height: 40px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
     padding: 0 0.2rem;
-    position: relative;
+    position: absolute;
 
     .tabs {
       font-size: 0.85rem;
@@ -34,6 +39,90 @@
       &:first-child {
         opacity: 1;
       }
+    }
+  }
+
+  .filterBtn {
+    border-radius: 1rem;
+    padding: 4px 9px;
+    background-color: #ffffff1a;
+    color: hsl(0 0% 98%);
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffffff14;
+    }
+
+    &[data-type='medium'] {
+      color: var(--primary-color);
+    }
+
+    &[data-type='easy'] {
+      color: #28c244;
+    }
+  }
+
+  .footerContanier {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    color: #fff9;
+    font-size: 1rem;
+    padding: 5px;
+    width: 100%;
+    background-color: #272627;
+
+    .footerLikeCnt {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      background-color: #ffffff1a;
+      overflow: hidden;
+      color: #fff9;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .linkcnt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0px 10px;
+      height: 30px;
+      font-size: 1rem;
+
+      & > p {
+        font-size: 0.7rem;
+      }
+
+      &:hover {
+        background-color: #ffffff1a;
+      }
+
+      &:first-child {
+        border-right: 1px solid var(--black-primary);
+      }
+    }
+
+    .divider {
+      width: 1px;
+      height: 1rem;
+      background-color: #ffffff1a;
+    }
+
+    .bradious {
+      border-radius: 8px;
+      margin-left: 5px;
     }
   }
 

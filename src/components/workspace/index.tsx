@@ -6,8 +6,8 @@ import PlayGround from '../playground/index';
 import ProblemDescription from '../problem-description/index';
 
 type Tprops = {
-  problem: Problem
-}
+  problem: Problem;
+};
 
 const WorkSpace: FC<Tprops> = ({ problem }) => {
   return (
@@ -18,7 +18,7 @@ const WorkSpace: FC<Tprops> = ({ problem }) => {
       sizes={[50, 50]}
     >
       <ProblemDescription onStretch={() => {}} problem={problem} />
-      <PlayGround />
+      <PlayGround problem={problem} />
     </Split>
   );
 };

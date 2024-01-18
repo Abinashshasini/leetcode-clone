@@ -1,12 +1,19 @@
-import { AiFillLike, AiFillDislike } from 'react-icons/ai';
-import { BsCheck2Circle } from 'react-icons/bs';
-import { TiStarOutline } from 'react-icons/ti';
-import { FaFlask } from 'react-icons/fa';
+import {
+  FaFlask,
+  FaTag,
+  FaLock,
+  FaLightbulb,
+  FaComments,
+  FaRegStar,
+} from 'react-icons/fa';
 import { GrNotes } from 'react-icons/gr';
+import { AiOutlineLike, AiOutlineQuestionCircle } from 'react-icons/ai';
+import { RiShareBoxLine } from 'react-icons/ri';
+import { SlDislike } from 'react-icons/sl';
 import { IoDocumentText } from 'react-icons/io5';
 import { MdFullscreen } from 'react-icons/md';
-import classes from './style.module.scss';
 import { Problem } from '@/utils/types/problem';
+import classes from './style.module.scss';
 
 type ProblemDescriptionProps = {
   onStretch: (_params: string) => void;
@@ -19,7 +26,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
 }) => {
   return (
     <div className={classes.container}>
-      <div className="flex px-0 h-[calc(100vh-94px)] overflow-y-auto flex-col">
+      <div className="flex px-0 h-[calc(100vh-94px)] overflow-y-auto flex-col pb-8">
         {/* Tabs */}
         <div className={classes.tabContainers}>
           <div className={classes.tabs}>
@@ -43,113 +50,105 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
         </div>
         <div className="px-5 py-3">
           {/* Problem heading */}
-          <div className="w-full">
+          <div className="w-full pt-9">
             <div className="flex space-x-4">
-              <div className="flex-1 mr-2 text-lg text-white font-medium">
+              <div className="flex-1 mr-2 text-2xl text-white font-medium">
                 {problem?.title}
               </div>
             </div>
-            <div className="flex items-center mt-3">
+            {/* Tabs */}
+            <div className="flex items-center mt-4">
               <div
-                className={`text-olive bg-olive inline-block rounded-[21px] bg-opacity-[.15] px-2.5 py-1 text-xs font-medium capitalize `}
+                className={`${classes.filterBtn} ${classes.type}`}
+                data-type="medium"
               >
-                Easy
+                Medium
               </div>
-              <div className="rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s text-dark-green-s">
-                <BsCheck2Circle />
+              <div className={`${classes.filterBtn} ${classes.type}`}>
+                <FaTag />
+                Topics
               </div>
-              <div className="flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px]  ml-4 text-lg transition-colors duration-200 text-dark-gray-6">
-                <AiFillLike />
-                <span className="text-xs">120</span>
+              <div className={`${classes.filterBtn} ${classes.type}`}>
+                <FaLock />
+                Companies
               </div>
-              <div className="flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px]  ml-4 text-lg transition-colors duration-200 text-green-s text-dark-gray-6">
-                <AiFillDislike />
-                <span className="text-xs">2</span>
-              </div>
-              <div className="cursor-pointer hover:bg-dark-fill-3  rounded p-[3px]  ml-4 text-xl transition-colors duration-200 text-green-s text-dark-gray-6 ">
-                <TiStarOutline />
+              <div className={`${classes.filterBtn} ${classes.type}`}>
+                <FaLightbulb />
+                Hint
               </div>
             </div>
 
             {/* Problem Statement(paragraphs) */}
-            <div className="text-white text-sm">
-              <p className="mt-3">
-                Given an array of integers <code>nums</code> and an integer{' '}
-                <code>target</code>, return
-                <em>
-                  indices of the two numbers such that they add up to
-                </em>{' '}
-                <code>target</code>.
-              </p>
-              <p className="mt-3">
-                You may assume that each input would have{' '}
-                <strong>exactly one solution</strong>, and you may not use
-                thesame element twice.
-              </p>
-              <p className="mt-3">You can return the answer in any order.</p>
+            <div className="text-white text-sm py-2">
+              <span
+                dangerouslySetInnerHTML={{ __html: problem.problemStatement }}
+              />
             </div>
 
             {/* Examples */}
-            <div className="mt-4">
-              {/* Example 1 */}
-              <div>
-                <p className="font-medium text-white ">Example 1: </p>
-                <div className="example-card">
-                  <pre>
-                    <strong className="text-white">Input: </strong> nums =
-                    [2,7,11,15], target = 9 <br />
-                    <strong>Output:</strong> [0,1] <br />
-                    <strong>Explanation:</strong>Because nums[0] + nums[1] == 9,
-                    we return [0, 1].
-                  </pre>
+            <div className="my-8">
+              {problem?.examples?.map((example, index) => (
+                <div key={example.id}>
+                  <p className="text-sm text-white">Example {index + 1}: </p>
+                  <div className="example-card">
+                    <pre>
+                      <span>
+                        <strong>Input: </strong>
+                        {example.inputText} <br />
+                      </span>
+                      <span>
+                        <strong>Output:</strong> {example.outputText}
+                      </span>
+                      <span>
+                        <strong>Explanation:</strong>
+                        {example.explanation}
+                      </span>
+                    </pre>
+                  </div>
                 </div>
-              </div>
-
-              {/* Example 2 */}
-              <div>
-                <p className="font-medium text-white ">Example 2: </p>
-                <div className="example-card">
-                  <pre>
-                    <strong className="text-white">Input: </strong> nums =
-                    [3,2,4], target = 6 <br />
-                    <strong>Output:</strong> [1,2] <br />
-                    <strong>Explanation:</strong>Because nums[1] + nums[2] == 6,
-                    we return [1, 2].
-                  </pre>
-                </div>
-              </div>
-              {/* Example 3 */}
-              <div>
-                <p className="font-medium text-white ">Example 3: </p>
-                <div className="example-card">
-                  <pre>
-                    <strong className="text-white">Input: </strong> nums =
-                    [3,3], target = 6
-                    <br />
-                    <strong>Output:</strong> [0,1] <br />
-                  </pre>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Constraints */}
             <div className="my-5">
-              <div className="text-white text-sm font-medium">Constraints:</div>
-              <ul className="text-white ml-5 list-disc">
-                <li className="mt-2">
-                  <code>2 ≤ nums.length ≤ 10</code>
-                </li>
+              {problem?.constraints && (
+                <>
+                  <div className="text-white text-sm font-medium">
+                    Constraints:
+                  </div>
+                  <ul className="text-white ml-5 list-disc">
+                    <span
+                      dangerouslySetInnerHTML={{ __html: problem.constraints }}
+                    />
+                  </ul>
+                </>
+              )}
+            </div>
 
-                <li className="mt-2">
-                  <code>-10 ≤ nums[i] ≤ 10</code>
-                </li>
-                <li className="mt-2">
-                  <code>-10 ≤ target ≤ 10</code>
-                </li>
-                <li className="mt-2 text-sm">
-                  <strong>Only one valid answer exists.</strong>
-                </li>
-              </ul>
+            {/* Footer buttons */}
+            <div className={classes.footerContanier}>
+              <div className={classes.footerLikeCnt}>
+                <div className={classes.linkcnt}>
+                  <AiOutlineLike /> <p>21K</p>
+                </div>
+                <div className={`${classes.linkcnt} ${classes.bradious}`}>
+                  <SlDislike />
+                </div>
+              </div>
+
+              <div className={`${classes.linkcnt} ${classes.bradious}`}>
+                <p>99</p> <FaComments />
+              </div>
+              <span className={classes.divider} />
+              <div className={`${classes.linkcnt} ${classes.bradious}`}>
+                <FaRegStar />
+              </div>
+              <div className={`${classes.linkcnt} ${classes.bradious}`}>
+                <RiShareBoxLine />
+              </div>
+              <div className={`${classes.linkcnt} ${classes.bradious}`}>
+                <AiOutlineQuestionCircle />
+              </div>
             </div>
           </div>
         </div>
