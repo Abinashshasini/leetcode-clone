@@ -11,7 +11,7 @@ const PlayGround: FC = () => {
   return (
     <Split
       direction="vertical"
-      className="h-[calc(100vh-90px)]"
+      className="h-[calc(100vh-90px)] flex-1"
       sizes={[60, 40]}
     >
       <div className={classes.codeEditor}>

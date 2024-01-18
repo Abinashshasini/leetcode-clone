@@ -4,26 +4,20 @@ import WorkSpace from '@/components/workspace/index';
 import { problems } from '@/utils/problems/index';
 import classes from './style.module.scss';
 
+const PidPage = async ({ params }: { params: any }) => {
+  /** Function to retrive data */
+  const response = problems[params.pid];
+  response.handlerFunction = response.handlerFunction.toString();
 
-/** Function to fetch blog data */
-const handleFetchProblemData = (pid: string) => {
-  const problem = Object.keys(problems).filter((problem) => ({
-    data: {
-      pid: problem
-    }
-  }))
+  // * This will be caught by the error page and passed to the page as props * //
+  if (!response) {
+    throw new Error('Failed to fetch data');
+  }
 
-  return problem
-}
-
-const PidPage = async ({ params }: { params: any}) => {
-
-  const problem = handleFetchProblemData(params.pid)
-  
   return (
     <main className={classes.container}>
       <PidHeader />
-      <WorkSpace />
+      <WorkSpace problem={response} />
     </main>
   );
 };

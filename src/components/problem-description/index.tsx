@@ -6,13 +6,16 @@ import { GrNotes } from 'react-icons/gr';
 import { IoDocumentText } from 'react-icons/io5';
 import { MdFullscreen } from 'react-icons/md';
 import classes from './style.module.scss';
+import { Problem } from '@/utils/types/problem';
 
 type ProblemDescriptionProps = {
   onStretch: (_params: string) => void;
+  problem: Problem;
 };
 
 const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
   onStretch,
+  problem,
 }) => {
   return (
     <div className={classes.container}>
@@ -43,7 +46,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
           <div className="w-full">
             <div className="flex space-x-4">
               <div className="flex-1 mr-2 text-lg text-white font-medium">
-                1. Two Sum
+                {problem?.title}
               </div>
             </div>
             <div className="flex items-center mt-3">

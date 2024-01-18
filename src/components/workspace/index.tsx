@@ -1,10 +1,15 @@
 'use client';
+import { Problem } from '@/utils/types/problem';
 import React, { FC } from 'react';
 import Split from 'react-split';
 import PlayGround from '../playground/index';
 import ProblemDescription from '../problem-description/index';
 
-const WorkSpace: FC = () => {
+type Tprops = {
+  problem: Problem
+}
+
+const WorkSpace: FC<Tprops> = ({ problem }) => {
   return (
     <Split
       className="split"
@@ -12,7 +17,7 @@ const WorkSpace: FC = () => {
       style={{ padding: '1rem', paddingTop: '5px' }}
       sizes={[50, 50]}
     >
-      <ProblemDescription onStretch={() => {}} />
+      <ProblemDescription onStretch={() => {}} problem={problem} />
       <PlayGround />
     </Split>
   );
