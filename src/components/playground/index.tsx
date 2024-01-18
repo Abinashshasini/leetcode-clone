@@ -7,6 +7,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { IoIosSettings } from 'react-icons/io';
 import classes from './style.module.scss';
 import { Problem } from '@/utils/types/problem';
+import TestCases from '../test-cases/index';
 
 type Tprops = {
   problem: Problem;
@@ -42,7 +43,7 @@ const PlayGround: FC<Tprops> = ({ problem }) => {
           style={{ fontSize: 14 }}
         />
       </div>
-      <div className={classes.textCases}>testcase</div>
+      <TestCases problem={problem} />
     </Split>
   );
 };

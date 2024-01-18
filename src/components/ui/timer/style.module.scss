@@ -17,7 +17,7 @@
   border-radius: 6px;
   font-size: 1rem;
   cursor: default;
-  animation: scale 0.3s ease-in-out;
+  animation: scale 0.1s ease-in-out;
 
   .iconSmall {
     width: 1rem;
@@ -40,6 +40,7 @@
   & > p {
     width: 100px;
     text-align: center;
+    color: #eff1f6bf;
   }
 }
 

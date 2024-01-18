@@ -37,6 +37,10 @@ body {
   border-radius: 6px;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0;
+}
+
 /* color classes */
 .color_gray {
   color: #bdbdbd;

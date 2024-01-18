@@ -67,7 +67,7 @@ export const twoSum: Problem = {
     },
     {
       id: 3,
-      inputText: ' nums = [3,3], target = 6',
+      inputText: 'nums = [3,3], target = 6',
       outputText: '[0,1]',
     },
   ],

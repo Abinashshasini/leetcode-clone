@@ -6,6 +6,7 @@ import {
   FaComments,
   FaRegStar,
 } from 'react-icons/fa';
+import Image from 'next/image';
 import { GrNotes } from 'react-icons/gr';
 import { AiOutlineLike, AiOutlineQuestionCircle } from 'react-icons/ai';
 import { RiShareBoxLine } from 'react-icons/ri';
@@ -26,7 +27,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
 }) => {
   return (
     <div className={classes.container}>
-      <div className="flex px-0 h-[calc(100vh-94px)] overflow-y-auto flex-col pb-8">
+      <div className="flex px-0 h-[calc(100vh-94px)] overflow-y-auto flex-col pb-8 hide-scrollbar">
         {/* Tabs */}
         <div className={classes.tabContainers}>
           <div className={classes.tabs}>
@@ -90,6 +91,15 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
               {problem?.examples?.map((example, index) => (
                 <div key={example.id}>
                   <p className="text-sm text-white">Example {index + 1}: </p>
+                  {example?.img && (
+                    <Image
+                      src={example.img}
+                      alt="image"
+                      width={500}
+                      height={300}
+                      className={classes.image}
+                    />
+                  )}
                   <div className="example-card">
                     <pre>
                       <span>
