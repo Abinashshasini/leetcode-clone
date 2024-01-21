@@ -23,6 +23,9 @@
     color: #f8f8fd;
     font-size: 0.9rem;
     line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     cursor: pointer;
 
     & > svg {
@@ -35,15 +38,15 @@
       color: var(--blue-primary);
     }
 
-    &[data-difficulty='easy'] {
+    &[data-difficulty='Easy'] {
       color: var(--secondary-color);
     }
 
-    &[data-difficulty='medium'] {
+    &[data-difficulty='Medium'] {
       color: var(--primary-color);
     }
 
-    &[data-difficulty='hard'] {
+    &[data-difficulty='Hard'] {
       color: #ff375f;
     }
   }

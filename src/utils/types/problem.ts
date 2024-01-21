@@ -24,10 +24,13 @@ export type DBProblem = {
   id: string;
   title: string;
   category: string;
+  acceptance: string;
+  solutions: string;
   difficulty: string;
   likes: number;
   dislikes: number;
   order: number;
+  status: boolean;
   videoId?: string;
   link?: string;
 };

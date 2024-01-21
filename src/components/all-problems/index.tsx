@@ -5,6 +5,7 @@ import useProblems from '@/hooks/useProblems';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import QuestionCard from '../question-card/index';
 import classes from './style.module.scss';
+import { DBProblem } from '@/utils/types/problem';
 
 const LoadingSkeleton = () => {
   return (
@@ -56,11 +57,9 @@ const AllProblems: FC = () => {
         }
         return (
           <>
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
+            {problems.map((problem: DBProblem) => (
+              <QuestionCard problemData={problem} key={problem.id} />
+            ))}
           </>
         );
       })()}

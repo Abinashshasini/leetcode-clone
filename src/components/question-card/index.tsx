@@ -1,9 +1,11 @@
 import React from 'react';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 import { HiOutlineDocumentText } from 'react-icons/hi2';
+import { CiBookmark } from 'react-icons/ci';
+import { DBProblem } from '@/utils/types/problem';
 import classes from './style.module.scss';
 
-const QuestionCard = () => {
+const QuestionCard = ({ problemData }: { problemData: DBProblem }) => {
   /** Function to generate a random number */
   const handleGenerateRandomNumber = () => {
     const num = Math.floor(Math.random() * 10);
@@ -17,25 +19,32 @@ const QuestionCard = () => {
   return (
     <div className={classes.container}>
       <div className={classes.status}>
-        <IoCheckmarkCircleOutline color="#2cbb5d" />
-        {/* <CiBookmark color="#f8f8fd" /> */}
+        {problemData.status ? (
+          <IoCheckmarkCircleOutline color="#2cbb5d" />
+        ) : (
+          <CiBookmark color="#f8f8fd" />
+        )}
       </div>
-      <div className={`${classes.title}`}>931 . Minimum Falling Path Sum</div>
-      <div
+      <div className={`${classes.title}`}>{problemData.title}</div>
+      <a
         className={`${classes.title}`}
         style={{
           color: `${
             handleGenerateRandomNumber() ? 'rgb(175 82 222)' : '#1890ff'
           }`,
         }}
+        href={problemData.solutions}
       >
         <HiOutlineDocumentText />
+      </a>
+      <div className={`${classes.title} ml-6`}>{problemData.acceptance}</div>
+      <div
+        className={`${classes.title} ml-6`}
+        data-difficulty={problemData.difficulty}
+      >
+        {problemData.difficulty}
       </div>
-      <div className={`${classes.title} ml-6`}>64.7%</div>
-      <div className={`${classes.title} ml-6`} data-difficulty="medium">
-        Medium
-      </div>
-      <div className={`${classes.title} ml-6`}>Array</div>
+      <div className={`${classes.title} ml-6`}>{problemData.category}</div>
     </div>
   );
 };
