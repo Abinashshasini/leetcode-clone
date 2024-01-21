@@ -7,7 +7,7 @@ import Modal from '../ui/modal/index';
 
 const AddProblems = () => {
   /** Requires staes and props */
-  const [openModal, setModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [inputes, setInputes] = useState({
     id: '',
     title: '',
@@ -104,8 +104,8 @@ const AddProblems = () => {
           </form>
         </div>
       )}
-      open={true}
-      onClose={() => {}}
+      open={openModal}
+      onClose={() => setOpenModal(false)}
     />
   );
 };

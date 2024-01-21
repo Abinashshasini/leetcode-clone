@@ -1,0 +1,54 @@
+@mixin question-grid {
+  display: grid;
+  grid-template-columns: 12% 40% 12% 12% 12% 12%;
+}
+
+.container {
+  padding: 11px 4px;
+  @include question-grid();
+
+  .status {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+
+    & > svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+
+  .title {
+    color: #f8f8fd;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    cursor: pointer;
+
+    & > svg {
+      width: 1.2rem;
+
+      height: 1.2rem;
+    }
+
+    &:hover {
+      color: var(--blue-primary);
+    }
+
+    &[data-difficulty='easy'] {
+      color: var(--secondary-color);
+    }
+
+    &[data-difficulty='medium'] {
+      color: var(--primary-color);
+    }
+
+    &[data-difficulty='hard'] {
+      color: #ff375f;
+    }
+  }
+
+  &:nth-child(odd) {
+    background-color: #2a2a2a;
+  }
+}
