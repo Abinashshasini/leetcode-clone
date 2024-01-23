@@ -1,6 +1,7 @@
 import React from 'react';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 import { HiOutlineDocumentText } from 'react-icons/hi2';
+import Link from 'next/link';
 import { CiBookmark } from 'react-icons/ci';
 import { DBProblem } from '@/utils/types/problem';
 import classes from './style.module.scss';
@@ -25,7 +26,9 @@ const QuestionCard = ({ problemData }: { problemData: DBProblem }) => {
           <CiBookmark color="#f8f8fd" />
         )}
       </div>
-      <div className={`${classes.title}`}>{problemData.title}</div>
+      <Link href={`problems/${problemData.id}`} className={`${classes.title}`}>
+        {problemData.title}
+      </Link>
       <a
         className={`${classes.title}`}
         style={{
