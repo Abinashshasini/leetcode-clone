@@ -31,6 +31,7 @@ export type DBProblem = {
   dislikes: number;
   order: number;
   status: boolean;
+  comments: string[];
   videoId?: string;
   link?: string;
 };

@@ -59,12 +59,16 @@
       background-color: #ffffff14;
     }
 
-    &[data-type='medium'] {
+    &[data-type='Medium'] {
       color: var(--primary-color);
     }
 
-    &[data-type='easy'] {
+    &[data-type='Easy'] {
       color: #28c244;
+    }
+
+    &[data-type='Hard'] {
+      color: #ff375f;
     }
   }
 

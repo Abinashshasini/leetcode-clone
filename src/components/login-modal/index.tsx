@@ -13,8 +13,9 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import Input from '../ui/input/index';
 import Button from '../ui/button/index';
-import { auth } from '@/firebase/firebase';
+import { auth, fireStore } from '@/firebase/firebase';
 import classes from './style.module.scss';
+import { setDoc, doc } from 'firebase/firestore';
 
 type TFormValues = {
   email: string;
@@ -35,6 +36,7 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
   const {
     reset,
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<TFormValues>({
@@ -68,6 +70,19 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
         position: 'top-center',
         icon: '👏',
       });
+      // stting user info in dB
+      const userData = {
+        uid: newUser.user.uid,
+        email: newUser.user.email,
+        userName: getValues('userName'),
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        likedProblems: [],
+        dislikedProblems: [],
+        solvedProblems: [],
+        starredProblems: [],
+      };
+      await setDoc(doc(fireStore, 'users', newUser.user.uid), userData);
       handleClose();
     } catch (error: any) {
       console.error('Something went wrong while registering the user');

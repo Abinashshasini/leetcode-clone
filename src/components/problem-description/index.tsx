@@ -1,3 +1,4 @@
+'use client';
 import {
   FaFlask,
   FaTag,
@@ -8,13 +9,20 @@ import {
 } from 'react-icons/fa';
 import Image from 'next/image';
 import { GrNotes } from 'react-icons/gr';
-import { AiOutlineLike, AiOutlineQuestionCircle } from 'react-icons/ai';
+import {
+  AiOutlineLike,
+  AiOutlineQuestionCircle,
+  AiFillLike,
+  AiFillDislike,
+} from 'react-icons/ai';
 import { RiShareBoxLine } from 'react-icons/ri';
 import { SlDislike } from 'react-icons/sl';
 import { IoDocumentText } from 'react-icons/io5';
 import { MdFullscreen } from 'react-icons/md';
 import { Problem } from '@/utils/types/problem';
+import useGetCurrentProblem from '@/hooks/useGetCurrentProblem';
 import classes from './style.module.scss';
+import { useUsersActions } from '@/hooks/useUsersActions';
 
 type ProblemDescriptionProps = {
   onStretch: (_params: string) => void;
@@ -25,6 +33,13 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
   onStretch,
   problem,
 }) => {
+  /** Hooks to fetch data */
+  const { currentProblem, loading, setCurrentProblem } = useGetCurrentProblem(
+    problem.id
+  );
+  const { liked, disLiked, starred, setData, solved, handleLike } =
+    useUsersActions(problem.id, setCurrentProblem);
+
   return (
     <div className={classes.container}>
       <div className="flex px-0 h-[calc(100vh-94px)] overflow-y-auto flex-col pb-8 hide-scrollbar">
@@ -59,12 +74,15 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
             </div>
             {/* Tabs */}
             <div className="flex items-center mt-4">
-              <div
-                className={`${classes.filterBtn} ${classes.type}`}
-                data-type="medium"
-              >
-                Medium
-              </div>
+              {!loading && (
+                <div
+                  className={`${classes.filterBtn} ${classes.type}`}
+                  data-type={currentProblem?.difficulty}
+                >
+                  {currentProblem?.difficulty}
+                </div>
+              )}
+
               <div className={`${classes.filterBtn} ${classes.type}`}>
                 <FaTag />
                 Topics
@@ -138,16 +156,17 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
             {/* Footer buttons */}
             <div className={classes.footerContanier}>
               <div className={classes.footerLikeCnt}>
-                <div className={classes.linkcnt}>
-                  <AiOutlineLike /> <p>21K</p>
+                <div className={classes.linkcnt} onClick={handleLike}>
+                  {liked ? <AiFillLike color="1890ff" /> : <AiOutlineLike />}
+                  <p>{currentProblem?.likes}</p>
                 </div>
                 <div className={`${classes.linkcnt} ${classes.bradious}`}>
-                  <SlDislike />
+                  {disLiked ? <AiFillDislike color="1890ff" /> : <SlDislike />}
                 </div>
               </div>
 
               <div className={`${classes.linkcnt} ${classes.bradious}`}>
-                <p>99</p> <FaComments />
+                <p>{currentProblem?.comments?.length}</p> <FaComments />
               </div>
               <span className={classes.divider} />
               <div className={`${classes.linkcnt} ${classes.bradious}`}>
