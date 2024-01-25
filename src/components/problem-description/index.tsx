@@ -6,6 +6,7 @@ import {
   FaLightbulb,
   FaComments,
   FaRegStar,
+  FaStar,
 } from 'react-icons/fa';
 import Image from 'next/image';
 import { GrNotes } from 'react-icons/gr';
@@ -13,7 +14,7 @@ import {
   AiOutlineLike,
   AiOutlineQuestionCircle,
   AiFillLike,
-  AiFillDislike,
+  AiOutlineLoading3Quarters,
 } from 'react-icons/ai';
 import { RiShareBoxLine } from 'react-icons/ri';
 import { SlDislike } from 'react-icons/sl';
@@ -21,8 +22,8 @@ import { IoDocumentText } from 'react-icons/io5';
 import { MdFullscreen } from 'react-icons/md';
 import { Problem } from '@/utils/types/problem';
 import useGetCurrentProblem from '@/hooks/useGetCurrentProblem';
-import classes from './style.module.scss';
 import { useUsersActions } from '@/hooks/useUsersActions';
+import classes from './style.module.scss';
 
 type ProblemDescriptionProps = {
   onStretch: (_params: string) => void;
@@ -37,8 +38,17 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
   const { currentProblem, loading, setCurrentProblem } = useGetCurrentProblem(
     problem.id
   );
-  const { liked, disLiked, starred, setData, solved, handleLike } =
-    useUsersActions(problem.id, setCurrentProblem);
+  const {
+    liked,
+    disLiked,
+    starred,
+    setData,
+    solved,
+    updating,
+    handleLike,
+    handleStar,
+    handleDislike,
+  } = useUsersActions(problem.id, setCurrentProblem);
 
   return (
     <div className={classes.container}>
@@ -157,11 +167,21 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
             <div className={classes.footerContanier}>
               <div className={classes.footerLikeCnt}>
                 <div className={classes.linkcnt} onClick={handleLike}>
-                  {liked ? <AiFillLike color="1890ff" /> : <AiOutlineLike />}
+                  {updating && (
+                    <AiOutlineLoading3Quarters className="animate-spin w-3 h-3" />
+                  )}
+                  {!updating && liked && <AiFillLike color="1890ff" />}
+                  {!updating && !liked && <AiOutlineLike />}
                   <p>{currentProblem?.likes}</p>
                 </div>
-                <div className={`${classes.linkcnt} ${classes.bradious}`}>
-                  {disLiked ? <AiFillDislike color="1890ff" /> : <SlDislike />}
+                <div
+                  className={`${classes.linkcnt} ${classes.bradious}`}
+                  onClick={handleDislike}
+                >
+                  {updating && (
+                    <AiOutlineLoading3Quarters className="animate-spin w-3 h-3" />
+                  )}
+                  {!updating && <SlDislike color={disLiked ? '1890ff' : ''} />}
                 </div>
               </div>
 
@@ -169,8 +189,15 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
                 <p>{currentProblem?.comments?.length}</p> <FaComments />
               </div>
               <span className={classes.divider} />
-              <div className={`${classes.linkcnt} ${classes.bradious}`}>
-                <FaRegStar />
+              <div
+                className={`${classes.linkcnt} ${classes.bradious}`}
+                onClick={handleStar}
+              >
+                {updating && (
+                  <AiOutlineLoading3Quarters className="animate-spin w-3 h-3" />
+                )}
+                {!updating && starred && <FaStar color="fea116" />}
+                {!updating && !starred && <FaRegStar />}
               </div>
               <div className={`${classes.linkcnt} ${classes.bradious}`}>
                 <RiShareBoxLine />
