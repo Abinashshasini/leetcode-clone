@@ -32,10 +32,22 @@ const PlayGround: FC<Tprops> = ({ problem }) => {
   /** Function to submithe the user code to backend server to check for pre defined test-cases */
   const handleSubmitCode = async () => {
     try {
-      const response = await axios.post('http://localhost:5050/twosum', {
-        code: userCode,
-      });
-      console.log('response', response);
+      const response = await axios.post(
+        'http://localhost:5050/api/v1/problem/compile-problem',
+        {
+          userCode: userCode,
+          type: 'run',
+          id: problem.id,
+        }
+      );
+      if (response.data.error) {
+        console.error('Compilation Error:', response.data.error);
+        // Handle compilation error here, for example, show an error message to the user
+      } else {
+        // Compilation was successful, process the output
+        console.log('Output:', response.data.output);
+        // Handle successful compilation here
+      }
     } catch (error) {}
   };
 
