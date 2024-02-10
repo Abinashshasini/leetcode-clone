@@ -11,6 +11,7 @@ import Header from '@/components/header/index';
 import LoginModal from '@/components/login-modal';
 import { auth } from '@/firebase/firebase';
 import IpadDesign from '@/components/ipad/index';
+import ExploreCard from '@/components/explore-card/index';
 import classes from './style.module.scss';
 
 export default function Home() {
@@ -78,13 +79,12 @@ export default function Home() {
             Get Started <IoIosArrowForward />
           </div>
         </div>
-        <div className={classes.detailsImageWarper}>
-          <img
-            src="/assets/tasks.png"
-            alt="dashboard"
-            width={300}
-            height={300}
-          />
+        <div className={classes.exploreWarper}>
+          <div className={classes.exploreCnt}>
+            <ExploreCard index="1" />
+            <ExploreCard index="2" />
+            <ExploreCard index="3" />
+          </div>
         </div>
       </div>
 

@@ -67,6 +67,19 @@ const IpadDesign = () => {
             </div>
             <div className={classes.bottomBar}></div>
           </div>
+          <div className="p-3">
+            <div className={classes.line} />
+            <div className={classes.line} style={{ width: '50%' }} />
+            <div className={classes.line} style={{ width: '60%' }} />
+            <div
+              className={classes.line}
+              style={{ width: '40%', marginBottom: '20px' }}
+            />
+
+            <div className={classes.line} style={{ width: '80%' }} />
+            <div className={classes.line} style={{ width: '60%' }} />
+            <div className={classes.line} style={{ width: '30%' }} />
+          </div>
         </div>
       </div>
     </div>
