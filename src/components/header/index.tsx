@@ -29,7 +29,7 @@ const Header: FC<THeaderProps> = ({
     >
       <div className={classes.logo}>
         <Image src="/assets/logo.png" width={100} height={100} alt="logo" />
-        <h1>Leetcode</h1>
+        <h1>LeetCode</h1>
       </div>
 
       <div className={classes.menu}>

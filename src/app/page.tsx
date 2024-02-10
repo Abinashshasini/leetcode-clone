@@ -10,6 +10,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import Header from '@/components/header/index';
 import LoginModal from '@/components/login-modal';
 import { auth } from '@/firebase/firebase';
+import IpadDesign from '@/components/ipad/index';
 import classes from './style.module.scss';
 
 export default function Home() {
@@ -39,12 +40,7 @@ export default function Home() {
       <Header onClickSignIn={() => setIsLoginModalOpen(true)} />
       <div className={classes.herocontainer}>
         <div className={classes.heroImage}>
-          <img
-            src="/assets/dashboard.png"
-            alt="dashboard"
-            width={100}
-            height={100}
-          />
+          <IpadDesign />
         </div>
         <div className={classes.detailsCnt}>
           <h2>A New Way to Learn</h2>
