@@ -1,12 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @next/next/no-img-element */
 'use client';
 import { useEffect, useState } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { BsFillHexagonFill } from 'react-icons/bs';
 import { FaGraduationCap } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import Header from '@/components/header/index';
 import LoginModal from '@/components/login-modal';
 import { auth } from '@/firebase/firebase';
@@ -19,15 +16,12 @@ export default function Home() {
   /** Required states and props */
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  /** Firebase hook to check if the user is already logged in */
-  const [user] = useAuthState(auth);
-
   /** Effect to check if the user is already logged in */
-  useEffect(() => {
-    if (user) {
-      router.push('/problems');
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push('/problems');
+  //   }
+  // }, [user]);
 
   return (
     <main className={classes.main}>

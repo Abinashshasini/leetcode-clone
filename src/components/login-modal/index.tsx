@@ -16,6 +16,7 @@ import Button from '../ui/button/index';
 import { auth, fireStore } from '@/firebase/firebase';
 import classes from './style.module.scss';
 import { setDoc, doc } from 'firebase/firestore';
+import axios from 'axios';
 
 type TFormValues = {
   email: string;
@@ -61,31 +62,39 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
   /** Function to register user */
   const handleRegistreUser = async (
     email: string,
-    password: string | undefined
+    password: string | undefined,
+    userName: string | undefined
   ) => {
+    // try {
+    //   const newUser = await createUserWithEmailAndPassword(email, password);
+    //   if (!newUser) return;
+    //   toast.success('Voila your account created successfully', {
+    //     position: 'top-center',
+    //     icon: '👏',
+    //   });
+    //   // stting user info in dB
+    //   const userData = {
+    //     uid: newUser.user.uid,
+    //     email: newUser.user.email,
+    //     userName: getValues('userName'),
+    //     createdAt: Date.now(),
+    //     updatedAt: Date.now(),
+    //     likedProblems: [],
+    //     dislikedProblems: [],
+    //     solvedProblems: [],
+    //     starredProblems: [],
+    //   };
+    //   await setDoc(doc(fireStore, 'users', newUser.user.uid), userData);
+    //   handleClose();
+    // } catch (error: any) {
+    //   console.error('Something went wrong while registering the user');
+    // }
+
     try {
-      const newUser = await createUserWithEmailAndPassword(email, password);
-      if (!newUser) return;
-      toast.success('Voila your account created successfully', {
+    } catch (error) {
+      toast.error('Oops!! something went wrong', {
         position: 'top-center',
-        icon: '👏',
       });
-      // stting user info in dB
-      const userData = {
-        uid: newUser.user.uid,
-        email: newUser.user.email,
-        userName: getValues('userName'),
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        likedProblems: [],
-        dislikedProblems: [],
-        solvedProblems: [],
-        starredProblems: [],
-      };
-      await setDoc(doc(fireStore, 'users', newUser.user.uid), userData);
-      handleClose();
-    } catch (error: any) {
-      console.error('Something went wrong while registering the user');
     }
   };
 
@@ -105,9 +114,9 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
 
   /** Function to submit the form */
   const onSubmit = async (data: TFormValues) => {
-    const { email, password } = data;
+    const { email, password, userName } = data;
     if (formType === 'register') {
-      handleRegistreUser(email, password);
+      handleRegistreUser(email, password, userName);
     } else if (formType === 'login') {
       handleLogedinUser(email, password);
     }
@@ -256,23 +265,7 @@ const LoginModal: FC<TProps> = ({ handleClose }) => {
             loading={logedinLoading || registerLoading}
             onClick={handleSubmit(onSubmit)}
           />
-          <div className="text-center my-6 font-light text-sm color_gray">
-            or you can sign in with
-          </div>
-          <div className="flex w-full justify-center items-center gap-8">
-            <div className={classes.iconCnt}>
-              <FaGoogle />
-            </div>
-            <div className={classes.iconCnt}>
-              <FaGithub />
-            </div>
-            <div className={classes.iconCnt}>
-              <FaFacebook />
-            </div>
-            <div className={classes.iconCnt}>
-              <IoIosMore />
-            </div>
-          </div>
+
           <div className="text-center my-6 font-light text-sm color_gray px-6">
             This site is protected by reCAPTCHA and the Google Privacy Policy
             and Terms of Service apply.
